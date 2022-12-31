@@ -5,16 +5,26 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        min-width: 100% !important;
+        min-height: 100% !important;
+        justify-content: center;
+        margin-bottom: 20px;
       }
 
       .block {
-        width: 200px;
-        height: 200px;
-        margin: 5px;
+        width: 19%;
+        min-width: 80px;
+        max-width: 200px;
+        min-height: 80px;
+
         font-size: 20px;
         align-items: center;
         display: flex;
         justify-content: center;
+      }
+
+      .coolors-block-container > .coolors-palette-widget {
+        margin-bottom: 20px;
       }
     </style>
   </head>
@@ -75,22 +85,24 @@
       }
     </script>
 
-    <script src="https://coolors.co/palette-widget/widget.js"></script>
-    <script data-id="">
-      const palettes = []
-      colors.forEach((item, index) => {
-        if (index % 10 === 0) {
-          // If the index is even, create a new nested list
-          palettes.push([item.slice(1).toLowerCase()])
-        } else {
-          // If the index is odd, append the item to the previous nested list
-          palettes[palettes.length - 1].push(item.slice(1).toLowerCase())
-        }
-      })
+    <div class="coolors-block-container">
+      <script src="https://coolors.co/palette-widget/widget.js"></script>
+      <script data-id="">
+        const palettes = []
+        colors.forEach((item, index) => {
+          if (index % 10 === 0) {
+            // If the index is even, create a new nested list
+            palettes.push([item.slice(1).toLowerCase()])
+          } else {
+            // If the index is odd, append the item to the previous nested list
+            palettes[palettes.length - 1].push(item.slice(1).toLowerCase())
+          }
+        })
 
-      palettes.reverse().forEach((palette, index) => {
-        new CoolorsPaletteWidget('', palette)
-      })
-    </script>
+        palettes.reverse().forEach((palette, index) => {
+          new CoolorsPaletteWidget('', palette)
+        })
+      </script>
+    </div>
   </body>
 </html>
