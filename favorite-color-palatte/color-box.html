@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <style>
+      .block-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .block {
+        width: 200px;
+        height: 200px;
+        margin: 5px;
+        font-size: 20px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="block-container" class="block-container"></div>
+
+    <script>
+      const colors = [
+        '#ffeb3b',
+        '#ffcc80',
+        '#f9a825',
+        '#ffa000',
+        '#95c2ee',
+        '#509be4',
+        '#16528d',
+        '#fdfff5',
+        '#d7fb88',
+        '#89c606',
+        '#558b2f',
+        '#c29f87',
+        '#ad7d5c',
+        '#6e4d37',
+        '#ff99cf',
+        '#ff47a9',
+        '#ffbbad',
+        '#ef5350',
+        '#d32f2f',
+        '#91cabd',
+        '#5aaf9b',
+        '#d1c4e9',
+        '#673ab7',
+        '#4527a0',
+        '#f4f5f5',
+        '#bec2c4',
+        '#505053',
+        '#2e3032'
+      ]
+
+      // https://colors.dopely.top/material-design
+
+      const container = document.getElementById('block-container')
+
+      function getContrastYIQ(hexcolor) {
+        var r = parseInt(hexcolor.substr(1, 2), 16)
+        var g = parseInt(hexcolor.substr(3, 2), 16)
+        var b = parseInt(hexcolor.substr(5, 2), 16)
+        var yiq = (r * 299 + g * 587 + b * 114) / 1000
+        return yiq >= 128 ? 'black' : 'white'
+      }
+
+      for (const color of colors) {
+        const block = document.createElement('div')
+        block.classList.add('block')
+        block.style.backgroundColor = color
+        block.style.color = getContrastYIQ(color)
+        block.innerHTML = color
+        container.appendChild(block)
+      }
+    </script>
+
+    <script src="https://coolors.co/palette-widget/widget.js"></script>
+    <script data-id="">
+      const palettes = []
+      colors.forEach((item, index) => {
+        if (index % 10 === 0) {
+          // If the index is even, create a new nested list
+          palettes.push([item.slice(1).toLowerCase()])
+        } else {
+          // If the index is odd, append the item to the previous nested list
+          palettes[palettes.length - 1].push(item.slice(1).toLowerCase())
+        }
+      })
+
+      palettes.reverse().forEach((palette, index) => {
+        new CoolorsPaletteWidget('', palette)
+      })
+    </script>
+  </body>
+</html>
